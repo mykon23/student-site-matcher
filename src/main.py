@@ -1,4 +1,5 @@
 from argparse import ArgumentParser, ArgumentTypeError
+from models.site import Site
 import os
 import pandas as pd
 
@@ -19,7 +20,8 @@ def main(**kwargs):
         exit(1)
 
     df_sites = pd.read_csv(sites)
-    print(df_sites.head())
+    sites_data = [Site(**record) for record in df_sites.to_dict(orient='records')]
+    print(sites_data)
 
 
 if __name__ == "__main__":
